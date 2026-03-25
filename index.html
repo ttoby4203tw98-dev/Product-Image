@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW" class="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MURO AI - 無印風格產品生圖</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Noto Sans TC"', 'Inter', 'sans-serif'],
+              mono: ['"JetBrains Mono"', 'monospace'],
+            },
+            animation: {
+              'fade-in': 'fadeIn 0.8s ease-out',
+              'soft-pulse': 'softPulse 2s infinite ease-in-out',
+            },
+            keyframes: {
+              fadeIn: {
+                '0%': { opacity: '0', transform: 'translateY(10px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              softPulse: {
+                '0%, 100%': { opacity: '0.4' },
+                '50%': { opacity: '0.8' },
+              }
+            }
+          },
+        },
+      }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        background-color: #ffffff;
+        color: #333333;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+      }
+      ::-webkit-scrollbar { width: 4px; }
+      ::-webkit-scrollbar-track { background: #f5f5f5; }
+      ::-webkit-scrollbar-thumb { background: #d1d1d1; border-radius: 2px; }
+      
+      .muji-panel {
+        background: #ffffff;
+        border: 1px solid #e5e5e5;
+      }
+      
+      .muji-input {
+        background: #fcfcfc;
+        border: 1px solid #d1d1d1;
+        transition: border-color 0.2s;
+      }
+      
+      .muji-input:focus {
+        border-color: #7f7f7f;
+        outline: none;
+      }
+
+      .muji-button-primary {
+        background-color: #000000; /* Black */
+        color: white;
+      }
+
+      .muji-button-primary:hover {
+        background-color: #1a1a1a;
+      }
+
+      .muji-button-secondary {
+        background-color: #ffffff;
+        border: 1px solid #333333;
+        color: #333333;
+      }
+
+      .muji-button-secondary:hover {
+        background-color: #f5f5f5;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.29.0",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.553.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/src/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/src/index.tsx"></script>
+</body>
+</html>

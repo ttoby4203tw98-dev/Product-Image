@@ -1,0 +1,23 @@
+{
+  "entities": {
+    "GenerationFailure": {
+      "title": "Generation Failure",
+      "description": "Records of image generation failures and their corrections.",
+      "type": "object",
+      "properties": {
+        "originalPrompt": { "type": "string", "description": "The original prompt that failed." },
+        "failureReason": { "type": "string", "description": "The reason for failure (e.g., SAFETY, IMAGE_OTHER)." },
+        "correctedPrompt": { "type": "string", "description": "The prompt that successfully generated an image after correction." },
+        "category": { "type": "string", "description": "The category of the image (main, detail, features)." },
+        "timestamp": { "type": "string", "format": "date-time", "description": "When the failure occurred." }
+      },
+      "required": ["originalPrompt", "failureReason", "correctedPrompt", "timestamp"]
+    }
+  },
+  "firestore": {
+    "generation_failures": {
+      "schema": "GenerationFailure",
+      "description": "A collection of generation failures and their successful corrections."
+    }
+  }
+}

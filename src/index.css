@@ -1,0 +1,80 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Inter:wght@200;300;400;500;600&display=swap');
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Noto Serif TC", serif;
+  
+  --color-muji-bg: #FFFFFF;
+  --color-muji-paper: #FFFFFF;
+  --color-muji-ink: #000000;
+  --color-muji-gray: #666666;
+  --color-muji-line: #EEEEEE;
+  --color-muji-accent: #000000;
+}
+
+@layer base {
+  body {
+    @apply bg-muji-bg text-muji-ink selection:bg-muji-accent selection:text-white;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    @apply tracking-tight;
+  }
+}
+
+@layer components {
+  .muji-card {
+    @apply bg-muji-paper border border-muji-line rounded-sm shadow-md hover:shadow-lg transition-shadow duration-300;
+    background: linear-gradient(145deg, #ffffff, #fafafa);
+  }
+
+  .muji-button-primary {
+    @apply bg-muji-ink text-muji-paper hover:bg-black transition-all duration-300 px-6 py-3 text-base tracking-widest uppercase shadow-sm hover:shadow-md active:scale-95;
+    background: linear-gradient(to bottom, #1a1a1a, #000000);
+  }
+
+  .muji-button-secondary {
+    @apply bg-transparent border border-muji-ink text-muji-ink hover:bg-muji-ink hover:text-muji-paper transition-all duration-300 px-6 py-3 text-base tracking-widest uppercase shadow-sm hover:shadow-md active:scale-95;
+  }
+
+  .muji-input {
+    @apply bg-transparent border-b border-muji-line focus:border-muji-ink outline-none py-2 transition-colors duration-300 w-full text-base;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  
+  .tracking-muji {
+    letter-spacing: 0.25em;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-muji-line rounded-full;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  @apply bg-muji-gray;
+}

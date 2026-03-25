@@ -1,0 +1,36 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isValidGenerationFailure(data) {
+      return data.keys().hasAll(['originalPrompt', 'failureReason', 'correctedPrompt', 'timestamp']) &&
+             data.originalPrompt is string && data.originalPrompt.size() < 5000 &&
+             data.failureReason is string && data.failureReason.size() < 100 &&
+             data.correctedPrompt is string && data.correctedPrompt.size() < 5000 &&
+             data.timestamp is string;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() &&
+        (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin' ||
+          (request.auth.token.email == "ttoby4203tw98@gmail.com" && request.auth.token.email_verified == true));
+    }
+
+    match /generation_failures/{failureId} {
+      // Allow anyone to read failures to learn from them
+      allow read: if true;
+      // Allow authenticated users to record failures
+      allow create: if isAuthenticated() && isValidGenerationFailure(request.resource.data);
+      // No updates or deletes allowed for historical records
+      allow update, delete: if false;
+    }
+  }
+}
